@@ -61,6 +61,11 @@ message RegionEpoch {
     uint64 version = 2;
 }
 
+message RegionBucket {
+    bytes start_key = 1;
+    bytes end_key = 2; 
+}
+
 message Region {
     uint64 id = 1;
     // Region key range [start_key, end_key).
@@ -73,6 +78,7 @@ message Region {
     // The field is only used by PD and should be ignored otherwise.
     // If encryption_meta is empty (i.e. nil), it means start_key and end_key are unencrypted.
     encryptionpb.EncryptionMeta encryption_meta = 6;
+    repeated RegionBucket region_bucket = 7;
 }
 
 enum PeerRole {
