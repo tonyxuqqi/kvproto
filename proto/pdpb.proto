@@ -90,6 +90,8 @@ service PD {
     rpc LoadGlobalConfig(LoadGlobalConfigRequest) returns (LoadGlobalConfigResponse) {}
 
     rpc WatchGlobalConfig(WatchGlobalConfigRequest) returns (stream WatchGlobalConfigResponse) {}
+
+    rpc RegionStats(stream RegionStatsRequest) returns (stream RegionStatsResponse) {}
 }
 
 message WatchGlobalConfigRequest {
@@ -794,4 +796,17 @@ enum QueryKind {
     AcquirePessimisticLock = 9;
     Commit = 10;
     Rollback = 11;
+}
+
+message RegionStatsRequest {
+    RequestHeader header = 1;
+    // Peer sending the stats--it can be leader or follower (in stale read case).
+    metapb.Peer peer = 2;
+    metapb.Buckets buckets = 3;
+}
+
+message RegionStatsResponse {
+    ResponseHeader header = 1;
+    // ID of the region
+    uint64 region_id = 2;
 }
