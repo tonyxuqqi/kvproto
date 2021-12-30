@@ -805,6 +805,9 @@ message RegionStatsRequest {
     // Peer sending the stats--it can be leader or follower (in stale read case).
     metapb.Peer peer = 2;
     metapb.Buckets buckets = 3;
+    uint64 read = 4;
+    uint64 query = 5;
+    uint64 write = 6;
 }
 
 message RegionStatsResponse {

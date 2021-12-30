@@ -66,7 +66,7 @@ message Buckets {
     uint64 version = 2; // A hint indicate if keys have changed.
     repeated bytes keys = 3;
     repeated uint64 read = 4;
-    repeated uint64 scan = 5;
+    repeated uint64 query = 5;
     repeated uint64 write = 6;
     uint64 period_in_us = 7; // The period in microseconds that stats are collected with in.
 }
