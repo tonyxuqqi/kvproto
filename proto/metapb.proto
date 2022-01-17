@@ -68,7 +68,7 @@ message Buckets {
     repeated uint64 read = 4;
     repeated uint64 query = 5;
     repeated uint64 write = 6;
-    uint64 period_in_us = 7; // The period in microseconds that stats are collected with in.
+    uint64 period_in_ms = 7; // The period in milliseconds that stats are collected with in.
 }
 
 message Region {
