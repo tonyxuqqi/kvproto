@@ -61,14 +61,31 @@ message RegionEpoch {
     uint64 version = 2;
 }
 
+message BucketStats {
+    // total read (point get) in bytes of each bucket
+    repeated uint64 read = 1;
+
+    // total scan in bytes of each bucket
+    repeated uint64 query = 2;
+
+    // total write in bytes of each bucket
+    repeated uint64 write = 3;
+}
+
 message Buckets {
     uint64 region_id = 1;
-    uint64 version = 2; // A hint indicate if keys have changed.
+
+    // A hint indicate if keys have changed.
+    uint64 version = 2;
+
+    // keys of buckets, not include start/end key of region
     repeated bytes keys = 3;
-    repeated uint64 read = 4;
-    repeated uint64 query = 5;
-    repeated uint64 write = 6;
-    uint64 period_in_ms = 7; // The period in milliseconds that stats are collected with in.
+
+    // bucket stats
+    repeated BucketStats stats = 4;
+
+    // The period in milliseconds that stats are collected with in
+    uint64 period_in_ms = 5;
 }
 
 message Region {
