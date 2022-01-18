@@ -63,13 +63,22 @@ message RegionEpoch {
 
 message BucketStats {
     // total read (point get) in bytes of each bucket
-    repeated uint64 read = 1;
+    repeated uint64 read_bytes = 1;
 
-    // total scan in bytes of each bucket
-    repeated uint64 query = 2;
+    // total scan in bytes of each bucket 
+    repeated uint64 scan_bytes = 2;
 
     // total write in bytes of each bucket
-    repeated uint64 write = 3;
+    repeated uint64 write_bytes = 3;
+
+    // total read (point get) qps of each bucket
+    repeated uint64 read_qps = 4;
+
+    // total scan qps of each bucket
+    repeated uint64 scan_qps = 5;
+
+    // total write qps of each bucket
+    repeated uint64 write_qps = 6;
 }
 
 message Buckets {
@@ -82,7 +91,7 @@ message Buckets {
     repeated bytes keys = 3;
 
     // bucket stats
-    repeated BucketStats stats = 4;
+    BucketStats stats = 4;
 
     // The period in milliseconds that stats are collected with in
     uint64 period_in_ms = 5;
@@ -100,7 +109,6 @@ message Region {
     // The field is only used by PD and should be ignored otherwise.
     // If encryption_meta is empty (i.e. nil), it means start_key and end_key are unencrypted.
     encryptionpb.EncryptionMeta encryption_meta = 6;
-    Buckets buckets = 7;
 }
 
 enum PeerRole {
