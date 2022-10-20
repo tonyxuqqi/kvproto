@@ -71,6 +71,7 @@ message RaftSnapshotData {
     repeated KeyValue data = 3;
     uint64 version = 4;
     SnapshotMeta meta = 5;
+    repeated metapb.Peer pending_remove_peers = 6;
 }
 
 message StoreIdent {
